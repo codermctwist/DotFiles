@@ -183,7 +183,6 @@ alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grbi='git rebase --autosquash -i'
 __git_complete grbi _git_rebase
-alias grbm='git rebase --autosquash -i origin/master'
 alias grbs='git rebase --skip'
 alias grh='git reset HEAD'
 alias gsh='git show'
@@ -236,7 +235,8 @@ glg-cnt() {
     echo "requires a filename"
     return 1
   fi
-  git log origin/master --no-merges --since="2 year ago" --pretty='%ae' -- $1 | sort | uniq -c | sort -r
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git log origin/$BRANCH --no-merges --since="2 year ago" --pretty='%ae' -- $1 | sort | uniq -c | sort -r
 }
 
 # find a file in git history, even if it is currently deleted
@@ -291,12 +291,18 @@ gst-repos() {
   done
 }
 
+grbm() {
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git rebase --autosquash -i origin/$BRANCH
+}
+
 gr-amend-email() {
   if [ $# -eq 0  ]; then
     echo "nothing to do..."
     return 1
   fi
-  git rebase --exec 'git commit --amend --no-edit --author "Ben Hayden <'$1'>"' -i origin/master
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git rebase --exec 'git commit --amend --no-edit --author "Ben Hayden <'$1'>"' -i origin/$BRANCH
 }
 
 # gh shorcuts
