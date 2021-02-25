@@ -22,7 +22,7 @@ let &t_te = "\e[0 q"
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 " Set vertical split chars
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 " Configure status line
 let g:lightline = {
       \ 'colorscheme': 'solarized',
@@ -169,8 +169,8 @@ nnoremap <leader>gg :GitGutter<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader>gp :Gpush<cr>
-nnoremap <leader>gb :Gblame!<cr>
-vnoremap <leader>gb :Gblame!<cr>
+nnoremap <leader>gb :Git blame<cr>
+vnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gl :Gbrowse!<cr>
 nnoremap <leader>gL :Gbrowse<cr>
 vnoremap <leader>gl :Gbrowse!<cr>
